@@ -1,0 +1,22 @@
+# ClickhouseDB container configuration
+image:
+  repository: clickhouse/clickhouse-server
+  tag: "24.11.1-alpine"
+  pullPolicy: Always
+
+# Resource requests and limits
+resources:
+  requests:
+    memory: 512Mi
+    cpu: 100m
+  limits:
+    memory: 2Gi
+    cpu: 1500m
+
+# Service configuration
+nodePort:
+  enabled: false
+
+annotations:
+  teknoir.org/managed-by: devstudio
+

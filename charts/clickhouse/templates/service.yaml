@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clickhouse
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: clickhouse
+  annotations:
+    {{- toYaml $.Values.annotations | nindent 4 }}
+spec:
+  type: {{ if .Values.nodePort.enabled }}NodePort{{ else }}ClusterIP{{ end }}
+  ports:
+    - name: http-api
+      port: 8123
+      protocol: TCP
+      targetPort: 8123
+      {{- if .Values.nodePort.enabled }}
+      nodePort: 31123
+      {{- end }}
+    - name: tcp-native
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+      {{- if .Values.nodePort.enabled }}
+      nodePort: 31900
+      {{- end }}
+  selector:
+    app: clickhouse

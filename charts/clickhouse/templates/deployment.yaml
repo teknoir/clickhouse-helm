@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clickhouse
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: clickhouse
+  annotations:
+    {{- toYaml $.Values.annotations | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clickhouse
+  template:
+    metadata:
+      labels:
+        app: clickhouse
+      annotations:
+        {{- toYaml $.Values.annotations | nindent 8 }}
+    spec:
+      containers:
+        - name: clickhouse
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            capabilities:
+              add:
+                - SYS_NICE
+                - NET_ADMIN
+                - IPC_LOCK
+          ports:
+            - containerPort: 8123
+            - containerPort: 9000
+          resources:
+            requests:
+              memory: {{ .Values.resources.requests.memory }}
+              cpu: {{ .Values.resources.requests.cpu }}
+            limits:
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}
+          readinessProbe:
+            exec:
+              command: ["wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8123/ping", "||", "exit 1"]
+            initialDelaySeconds: 30
+            timeoutSeconds: 2
+          livenessProbe:
+            exec:
+              command: ["wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8123/ping", "||", "exit 1"]
+            initialDelaySeconds: 90
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: logs
+              mountPath: /var/log/clickhouse-server
+            - name: data
+              mountPath: /var/lib/clickhouse
+      volumes:
+        - name: logs
+          hostPath:
+            path: /opt/teknoir/clickhouse/logs
+            type: DirectoryOrCreate
+        - name: data
+          hostPath:
+            path: /opt/teknoir/clickhouse/data
+            type: DirectoryOrCreate
