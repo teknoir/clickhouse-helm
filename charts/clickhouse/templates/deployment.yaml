@@ -18,6 +18,9 @@ spec:
       labels:
         app: clickhouse
       annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "9363"
         {{- toYaml $.Values.annotations | nindent 8 }}
     spec:
       containers:
@@ -63,6 +66,9 @@ spec:
               mountPath: /var/log/clickhouse-server
             - name: data
               mountPath: /var/lib/clickhouse
+            - name: config
+              mountPath: /etc/clickhouse-server/config.d/teknoir.xml
+              subPath: teknoir.xml
       volumes:
         - name: logs
           hostPath:
@@ -72,3 +78,6 @@ spec:
           hostPath:
             path: /opt/teknoir/clickhouse/data
             type: DirectoryOrCreate
+        - name: config
+          configMap:
+            name: clickhouse-config
