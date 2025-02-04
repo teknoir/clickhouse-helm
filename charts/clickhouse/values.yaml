@@ -21,7 +21,7 @@ annotations:
   teknoir.org/managed-by: devstudio
 
 # Configuration for the ClickhouseDB server
-config: |
+config: |-
   <clickhouse>
       <allow_disk_based_merge>true</allow_disk_based_merge>
 
@@ -34,7 +34,6 @@ config: |
       </prometheus>
 
       <logger>
-          <!-- Logging level can be "trace", "debug", "information", "warning", or "error" -->
           <level>information</level>
           <log_to_console>true</log_to_console>
           <console>1</console>
@@ -42,7 +41,7 @@ config: |
       </logger>
   </clickhouse>
 
-user: |
+user: |-
   <clickhouse>
       <profiles>
           <default>
