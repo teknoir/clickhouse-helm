@@ -20,4 +20,12 @@ data:
             <events>true</events>
             <asynchronous_metrics>true</asynchronous_metrics>
         </prometheus>
+
+        <logger>
+            <!-- Logging level can be "trace", "debug", "information", "warning", or "error" -->
+            <level>{{ .Values.config.logLevel }}</level>
+            <log_to_console>true</log_to_console>
+            <console>1</console>
+            <log_to_syslog>false</log_to_syslog>
+        </logger>
     </clickhouse>

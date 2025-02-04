@@ -20,3 +20,11 @@ nodePort:
 annotations:
   teknoir.org/managed-by: devstudio
 
+# Configuration for the ClickhouseDB server
+# Logging level can be "trace", "debug", "information", "warning", or "error"
+config:
+  logLevel: information
+
+user:
+  maxMemoryUsage: 4000000000
+  maxMemoryUsageForUser: 4500000000

@@ -13,8 +13,8 @@ data:
     <clickhouse>
         <profiles>
             <default>
-                <max_memory_usage>4000000000</max_memory_usage>
-                <max_memory_usage_for_user>8000000000</max_memory_usage_for_user>
+                <max_memory_usage>{{ .Values.user.maxMemoryUsage }}</max_memory_usage>
+                <max_memory_usage_for_user>{{ .Values.user.maxMemoryUsageForUser }}</max_memory_usage_for_user>
             </default>
         </profiles>
     </clickhouse>
