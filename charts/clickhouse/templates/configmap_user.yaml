@@ -10,4 +10,4 @@ metadata:
     {{- toYaml $.Values.annotations | nindent 4 }}
 data:
   teknoir.xml: |
-    {{- $.Values.users | nindent 4 }}
+    {{- .Values.user | nindent 4 }}

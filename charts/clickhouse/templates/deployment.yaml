@@ -64,8 +64,6 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 3
           volumeMounts:
-{{/*            - name: logs*/}}
-{{/*              mountPath: /var/log/clickhouse-server*/}}
             - name: data
               mountPath: /var/lib/clickhouse
             - name: config
@@ -75,10 +73,6 @@ spec:
               mountPath: /etc/clickhouse-server/users.d/teknoir.xml
               subPath: teknoir.xml
       volumes:
-{{/*        - name: logs*/}}
-{{/*          hostPath:*/}}
-{{/*            path: /opt/teknoir/clickhouse/logs*/}}
-{{/*            type: DirectoryOrCreate*/}}
         - name: data
           hostPath:
             path: /opt/teknoir/clickhouse/data
