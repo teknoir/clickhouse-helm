@@ -21,10 +21,33 @@ annotations:
   teknoir.org/managed-by: devstudio
 
 # Configuration for the ClickhouseDB server
-# Logging level can be "trace", "debug", "information", "warning", or "error"
-config:
-  logLevel: information
+config: |
+  <clickhouse>
+      <allow_disk_based_merge>true</allow_disk_based_merge>
 
-user:
-  maxMemoryUsage: 4000000000
-  maxMemoryUsageForUser: 4500000000
+      <prometheus>
+          <endpoint>/metrics</endpoint>
+          <port>9363</port>
+          <metrics>true</metrics>
+          <events>true</events>
+          <asynchronous_metrics>true</asynchronous_metrics>
+      </prometheus>
+
+      <logger>
+          <!-- Logging level can be "trace", "debug", "information", "warning", or "error" -->
+          <level>information</level>
+          <log_to_console>true</log_to_console>
+          <console>1</console>
+          <log_to_syslog>false</log_to_syslog>
+      </logger>
+  </clickhouse>
+
+user: |
+  <clickhouse>
+      <profiles>
+          <default>
+              <max_memory_usage>4000000000</max_memory_usage>
+              <max_memory_usage_for_user>4500000000</max_memory_usage_for_user>
+          </default>
+      </profiles>
+  </clickhouse>

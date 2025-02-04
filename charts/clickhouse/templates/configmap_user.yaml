@@ -10,11 +10,4 @@ metadata:
     {{- toYaml $.Values.annotations | nindent 4 }}
 data:
   teknoir.xml: |
-    <clickhouse>
-        <profiles>
-            <default>
-                <max_memory_usage>{{ .Values.user.maxMemoryUsage }}</max_memory_usage>
-                <max_memory_usage_for_user>{{ .Values.user.maxMemoryUsageForUser }}</max_memory_usage_for_user>
-            </default>
-        </profiles>
-    </clickhouse>
+    {{- toYaml $.Values.users | nindent 4 }}
