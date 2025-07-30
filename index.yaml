@@ -3,6 +3,16 @@ entries:
   clickhouse:
   - apiVersion: v2
     appVersion: 24.11.1-alpine
+    created: "2025-07-30T12:14:18.839745549Z"
+    description: A Helm chart for ClickhouseDB
+    digest: b589abb320e1694927944133b7e636b4fe3aae3f96e529d9de9f6df2a42ae818
+    name: clickhouse
+    type: application
+    urls:
+    - https://github.com/teknoir/clickhouse-helm/releases/download/clickhouse-0.2.0/clickhouse-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 24.11.1-alpine
     created: "2025-02-04T07:49:56.410898856Z"
     description: A Helm chart for ClickhouseDB
     digest: 51bdeaca3ae7b1b840b1ddcc3bf3713057af28479a153483c479410de3569ec4
@@ -101,4 +111,4 @@ entries:
     urls:
     - https://github.com/teknoir/clickhouse-helm/releases/download/clickhouse-0.1.0/clickhouse-0.1.0.tgz
     version: 0.1.0
-generated: "2025-02-04T07:49:56.410941576Z"
+generated: "2025-07-30T12:14:18.839883736Z"
