@@ -20,6 +20,9 @@ nodePort:
 annotations:
   teknoir.org/managed-by: devstudio
 
+# Workload node selector
+nodeSelector: {}
+
 # Configuration for the ClickhouseDB server
 config: |-
   <clickhouse>

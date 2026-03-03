@@ -25,6 +25,8 @@ spec:
         prometheus.io/port: "9363"
         {{- toYaml $.Values.annotations | nindent 8 }}
     spec:
+      nodeSelector:
+        {{- toYaml $.Values.nodeSelector | nindent 8 }}
       containers:
         - name: clickhouse
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
